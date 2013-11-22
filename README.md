@@ -23,7 +23,7 @@ Ok, I'd like to dump ```XYZ```
 You just need to create a plugin! It's that easy. Just look inside
 the plugin folder. Your plugin should have two main functions.
 The first one is ```init``` which will be used to init the plugin
-itself and pass it some useful function; and the second one is ```match```,
+itself and pass it some useful functions; and the second one is ```match```,
 which is used to pass a memory block to the plugin so it can search
 and dump it's content.
 
