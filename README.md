@@ -10,7 +10,7 @@ Why would I use memory-dumper
 
 Virtually memory-dumper can dump anything, it's up to you find it
 any use. That said, I use it to dump Flash files (```SWF```). There are
-many ```SWF``` encripted files that can't be decrypted easily. The only
+many ```SWF``` encrypted files that can't be decrypted easily. The only
 easy way is make them decrypt themself and them dump them directly
 from memory.
 
@@ -37,3 +37,5 @@ anything. Anyways, I'll accept a patch for this :)
 * I'm planning to write some more plugins. Probably a dumper for ```PDF```
 files. If you want a plugin for some specific data, use the ```New issue```
 button :)
+
+* Write some documentation about how to write a plugin.
