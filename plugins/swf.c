@@ -45,12 +45,15 @@ void match(unsigned char *mem_buf, unsigned long int mem_size){
 	for(i = 0; i < mem_size - 7; i++){
 		if(memcmp(mem_buf + i, "FWS", 3) == 0){ /*TODO: Support CWF and ZWF ?*/
 			
+			/*Read Flash version*/
 			version = mem_buf[i + 3];
 
+			/*Read Flash file size*/
 			size = mem_buf[i + 4] | (mem_buf[i + 5] << 8) | (mem_buf[i + 6] << 16) | (mem_buf[i + 7] << 24);			
 
 			//Skip 9 bytes (RECT values, we don't care about those)
 
+			/*Read Flash frame rate and frame count*/
 			framerate = mem_buf[i + 17 + 1];
 			framecount = mem_buf[i + 17 + 2] | (mem_buf[i + 17 + 3] << 8);
 
