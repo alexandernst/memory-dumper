@@ -51,7 +51,7 @@ void match(unsigned char *mem_buf, unsigned long int mem_size){
 			/*Read Flash file size*/
 			size = mem_buf[i + 4] | (mem_buf[i + 5] << 8) | (mem_buf[i + 6] << 16) | (mem_buf[i + 7] << 24);			
 
-			//Skip 9 bytes (RECT values, we don't care about those)
+			/*Skip 9 bytes (RECT values, we don't care about those)*/
 
 			/*Read Flash frame rate and frame count*/
 			framerate = mem_buf[i + 17 + 1];
