@@ -23,10 +23,10 @@ plugin_t *init(funcs_t *funcs){
 /*********************************************************************************************
 | HEADER (bytes)
 |
-| 1 | 1 | 1 | 1 | 4 | X | 2 | 2 
+| 1 | 1 | 1 | 1 | 4 | 9 | 2 | 2 
 | |   |   |   |   |   |   |   |-> frame count
 | |   |   |   |   |   |   |-> frame rate (ignore first byte)
-| |   |   |   |   |   |-> frame size (variable length)
+| |   |   |   |   |   |-> frame size
 | |   |   |   |   |-> length of file in bytes (doesn't match if compressed)
 | |   |   |   |-> version as bit, not as ASCII (v4 == 0x04, not 0x34)
 | |   |   |-> signature (always 'S')
