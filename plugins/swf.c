@@ -14,7 +14,7 @@ plugin_t *init(funcs_t *funcs){
 	_ = funcs;
 
 	plugin_t *this = calloc(1, sizeof(plugin_t));
-	this->name = "ttnator";
+	this->name = "swf";
 	this->description = "Dumps SWF files (No support for Zlib nor LZMA currently)";
 
 	return this;
