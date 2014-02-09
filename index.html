@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <title>Memory-dumper by alexandernst</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Memory-dumper</h1>
+        <h2>A tool for dumping files from processes memory</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/alexandernst/memory-dumper/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/alexandernst/memory-dumper/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/alexandernst/memory-dumper" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a name="what-is-memory-dumper" class="anchor" href="#what-is-memory-dumper"><span class="octicon octicon-link"></span></a>What is memory-dumper</h1>
+
+<p>memory-dumper is a tool for dumping files from process's memory.
+The main purpose is to find patterns inside the process's memory,
+which is done by plugins, and dump segments of memory to files.</p>
+
+<h1>
+<a name="why-would-i-use-memory-dumper" class="anchor" href="#why-would-i-use-memory-dumper"><span class="octicon octicon-link"></span></a>Why would I use memory-dumper</h1>
+
+<p>Virtually memory-dumper can dump anything, it's up to you find it
+any use. That said, I use it to dump Flash files (<code>SWF</code>). There are
+many <code>SWF</code> encrypted files that can't be decrypted easily. The only
+easy way is make them decrypt themself and them dump them directly
+from memory.</p>
+
+<p>New plugins for dumping any other type of data can be created
+easily.</p>
+
+<h1>
+<a name="ok-id-like-to-dump-xyz" class="anchor" href="#ok-id-like-to-dump-xyz"><span class="octicon octicon-link"></span></a>Ok, I'd like to dump <code>XYZ</code>
+</h1>
+
+<p>You just need to create a plugin! It's that easy. Just look inside
+the plugin folder. Your plugin should have two main functions.
+The first one is <code>init</code> which will be used to init the plugin
+itself and pass it some useful functions; and the second one is <code>match</code>,
+which is used to pass a memory block to the plugin so it can search
+and dump it's content.</p>
+
+<h1>
+<a name="to-do" class="anchor" href="#to-do"><span class="octicon octicon-link"></span></a>TO-DO:</h1>
+
+<ul>
+<li><p>Currently memory-dumper works only on Linux. Maybe I'll port it to 
+Windows at some point in the future, but I don't want to promise 
+anything. Anyways, I'll accept a patch for this :)</p></li>
+<li><p>I'm planning to write some more plugins. Probably a dumper for <code>PDF</code>
+files. If you want a plugin for some specific data, use the <code>New issue</code>
+button :)</p></li>
+<li><p>Write some documentation about how to write a plugin.</p></li>
+</ul>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
