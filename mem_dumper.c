@@ -17,11 +17,6 @@
 
 #define PLUGINS_DIR "./plugins/"
 
-extern unsigned char *get_mem_buf_hash(unsigned char *mem_buf, unsigned long int mem_size);
-extern unsigned char *hash_to_str(unsigned char *mem_hash);
-extern int is_mem_buf_dumped(unsigned char *mem_hash);
-extern void dump_mem_buf(unsigned char *mem_buf, unsigned long int mem_size, char *fname);
-
 static int keepRunning = 1;
 
 void intHandler(int dummy){
@@ -31,7 +26,6 @@ void intHandler(int dummy){
 int main(int argc, char **argv){
 	DIR *dir;
 	FILE *maps_fd;
-	funcs_t *funcs;
 	off64_t start, end;
 	struct dirent *ent;
 	struct sigaction act;
@@ -81,15 +75,6 @@ int main(int argc, char **argv){
 		printf("Available plugins:\n");
 	}
 
-	/*Structure that we'll pass to every plugin*/
-	/*The structure contains a pointer to each function in the*/
-	/*memory dumper that a plugin would possibly need to call*/
-	funcs = malloc(sizeof(funcs_t));
-	funcs->get_mem_buf_hash = get_mem_buf_hash;
-	funcs->hash_to_str = hash_to_str;
-	funcs->is_mem_buf_dumped = is_mem_buf_dumped;
-	funcs->dump_mem_buf = dump_mem_buf;
-
 	/*Vars used for operations on the linked list*/
 	plugin_t *tmp, *curr, *head = NULL;
 
@@ -128,9 +113,7 @@ int main(int argc, char **argv){
 		}
 
 		/*Init the plugin by calling it's 'init' function*/
-		/*We're passing it a pointer to a struct containing all the functions*/
-		/*that the plugin would possible need to call*/
-		plugin_t *(*initf)(funcs_t *funcs);
+		plugin_t *(*initf)();
 		*(plugin_t **) (&initf) = dlsym(plugin_handle, "init\0");
 
 		if((error = dlerror()) != NULL){
@@ -144,9 +127,9 @@ int main(int argc, char **argv){
 		/*Everything went fine, lets create/update the linked list containing*/
 		/*all the loaded plugins*/
 		if(!head){
-			curr = head = (*initf)(funcs);
+			curr = head = (*initf)();
 		}else{
-			curr->next = (*initf)(funcs);
+			curr->next = (*initf)();
 			tmp = curr;
 			curr = curr->next;
 		}
@@ -201,8 +184,8 @@ int main(int argc, char **argv){
 			continue;
 		}
 
-		/*We're ready to read*/		
-		while(fgets(line_buf, BUFSIZ, maps_fd)){
+		/*We're ready to read*/
+		while(fgets(line_buf, BUFSIZ, maps_fd) != NULL){
 
 			/*Quit faster if we receive Ctrl-c*/
 			if(!keepRunning){
@@ -233,7 +216,7 @@ int main(int argc, char **argv){
 			curr = head;
 			while(curr != NULL){
 				void *(*f)(unsigned char *mem_buf, unsigned long int mem_size);
-				*(void **) (&f) = dlsym(curr->hndl, "match\0");
+				*(void **) (&f) = dlsym(curr->hndl, "process\0");
 
 				(*f)(mem_buf, mem_size);
 				curr = curr->next;
@@ -272,9 +255,6 @@ int main(int argc, char **argv){
 		/*and free all the memory we allocated at some point*/
 		free(tmp);
 	}
-
-	free(funcs);
-	clean_mem_buf_hashs();
 
 	/*Bye bye!*/
 	return EXIT_SUCCESS;
