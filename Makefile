@@ -4,6 +4,7 @@ RM			=	@rm
 
 TARGET		=	mem_dumper
 PLUGINS_DIR	=	plugins
+LIBS_DIR	=	libs
 PLUGINS_CPP	=	$(wildcard $(PLUGINS_DIR)/*.cpp)
 PLUGINS_O	=	$(patsubst %.cpp,%.o, $(PLUGINS_CPP))
 PLUGINS_SO	=	$(patsubst %.cpp,%.so, $(PLUGINS_CPP))
@@ -18,10 +19,10 @@ $(TARGET): $(TARGET).o
 	$(CC) -o $@ $^ -g -Wall -std=gnu99 -ldl -lcrypto -Wl,--export-dynamic
 
 $(PLUGINS_DIR)/%.so: $(PLUGINS_DIR)/%.o
-	$(CPP) $^ -o $@ -shared
+	$(CXX) $^ -o $@ -shared -L$(LIBS_DIR)/cpp-bitstring -Wl,-R$(LIBS_DIR)/cpp-bitstring -lcpp-bitstring
 
 $(PLUGINS_DIR)/%.o: $(PLUGINS_DIR)/%.cpp
-	$(CPP) -c $< -o $@ -pedantic -g -Wall -fPIC -I.
+	$(CXX) -c $< -o $@ -g -Wall -std=c++11 -pedantic -fPIC -I.
 
 clean:
 	$(RM) -rf $(TARGET) *.o *.a $(PLUGINS_O) $(PLUGINS_SO)
