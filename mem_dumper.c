@@ -1,5 +1,4 @@
 #define _GNU_SOURCE
-#define _LARGEFILE64_SOURCE
 
 #include <errno.h>
 #include <fcntl.h>
