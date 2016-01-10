@@ -28,21 +28,21 @@ class MemoryDumper {
 
 	public:
 		bool from_file = false, from_process = false;
-		std::vector<Bits *> *chunks;
-		std::vector<plugin_t *> *plugins;
+		std::vector<Bits *> *chunks = NULL;
+		std::vector<plugin_t *> *plugins = NULL;
 
 		MemoryDumper();
 		virtual ~MemoryDumper();
 
 		bool init(int pid);
-		bool init(char *file);
+		bool init(const string& file);
 		bool initPlugins(char *plugins_list);
 		bool getChunksFromFile();
 		bool getChunksFromProcess();
 
 	private:
-		int pid;
-		char *file;
+		int pid = 0;
+		char *file = NULL;
 		bool keep_running;
 
 };

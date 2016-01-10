@@ -12,16 +12,25 @@ MemoryDumper::~MemoryDumper(){
 		free((*plugins_iter));
 	}
 
-	delete this->chunks;
-	delete this->plugins;
+	if(this->chunks != NULL){
+		delete this->chunks;
+	}
+
+	if(this->plugins != NULL){
+		delete this->plugins;
+	}
+
+	if(this->from_file && this->file != NULL){
+		free(this->file);
+	}
 }
 
-bool MemoryDumper::init(char *file){
+bool MemoryDumper::init(const string& file){
 	this->file = (char *) calloc(1, PATH_MAX+1);
 	this->from_file = true;
 
 	/*Get full path of file*/
-	char *p = realpath(file, this->file);
+	char *p = realpath(file.c_str(), this->file);
 	if(p == NULL){
 		return false;
 	}
@@ -103,11 +112,11 @@ bool MemoryDumper::initPlugins(char *plugins_list){
 		plugin->hndl = plugin_handle;
 		this->plugins->push_back(plugin);
 
-		printf("\t%s - %s\n", plugin->name, plugin->description);
+		printf("\t%s - %s\n", plugin->name.c_str(), plugin->description.c_str());
 
 		/*Check if we should actually load the plugin*/
 		if(plugins_list != NULL){
-			printf("\tPlugin does not match with load list, unloading %s...\n", plugin->name);
+			printf("\tPlugin does not match with load list, unloading %s...\n", plugin->name.c_str());
 			/*Close handle and free memory*/
 			dlclose(plugin->hndl);
 			free(plugin);
@@ -208,12 +217,15 @@ int main(int argc, char **argv){
 	while((ch = getopt(argc, argv, "f:p:l:sh")) != -1){
 		switch(ch){
 			case 'f':
-				if(!md->init(optarg)){
-					//return fail;
+				if(md->init(optarg) == false){
+					delete md;
+					return EXIT_FAILURE;
 				}
+				break;
 			case 'p':
-				if(!md->init(atoi(optarg))){
-					//return fail;
+				if(md->init(atoi(optarg)) == false){
+					delete md;
+					return EXIT_FAILURE;
 				}
 				break;
 			case 'l':
@@ -224,6 +236,7 @@ int main(int argc, char **argv){
 				break;
 			case 'h':
 				printf("Available options:\n");
+				printf("\tf <file path> - File path of the file you want to scan\n");
 				printf("\tp <pid> - PID of the process you want to dump\n");
 				printf("\tl <list,of,plugins | all> - Load only certain plugins, comma separated\n");
 				printf("\ts - Show available plugins\n");
