@@ -96,8 +96,8 @@ bool MemoryDumper::initPlugins(char *plugins_list){
 		}
 
 		/*Init the plugin by calling it's 'init' function*/
-		plugin_t *(*initf)();
-		*(plugin_t **) (&initf) = (plugin_t *) dlsym(plugin_handle, "init\0");
+		plugin_t *(*initf)(void);
+		initf = (plugin_t *(*)()) dlsym(plugin_handle, "init");
 
 		if((error = dlerror()) != NULL){
 			/*Oops... something wen't wrong calling the plugin's init function*/
@@ -108,7 +108,7 @@ bool MemoryDumper::initPlugins(char *plugins_list){
 		printf("Ok\n");
 
 		/*Everything went fine, lets create/update the linked list containing all the loaded plugins*/
-		plugin_t *plugin = (*initf)();
+		plugin_t *plugin = initf();
 		plugin->hndl = plugin_handle;
 		this->plugins->push_back(plugin);
 
@@ -266,9 +266,9 @@ int main(int argc, char **argv){
 		for(std::vector<Bits *>::iterator chunks_iter = md->chunks->begin(); chunks_iter != md->chunks->end(); ++chunks_iter){
 			void *(*f)(Bits *);
 
-			*(void **) (&f) = dlsym((*plugins_iter)->hndl, "process\0");
+			f = (void *(*)(Bits *)) dlsym((*plugins_iter)->hndl, "process");
 
-			(*f)((*chunks_iter));
+			f(*chunks_iter);
 		}
 
 	}
