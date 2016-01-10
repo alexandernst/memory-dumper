@@ -9,7 +9,6 @@
 #include <cmath>
 #include <bitset>
 #include <cstdio>
-#include <random>
 #include <cstdint>
 #include <cstring>
 #include <cstdlib>
@@ -35,7 +34,7 @@ class Bits {
 
 	public:
 
-		Bits(char *fname = NULL, ios_base::openmode mode = ios::in | ios::binary);
+		Bits(const string& fname = "", ios_base::openmode mode = ios::in | ios::binary);
 
 		Bits(unsigned char *chunk, size_t size);
 
@@ -121,7 +120,7 @@ class Bits {
 		bool auto_free_mem, is_from_file, error;
 
 		void init();
-		bool fromFile(char *fname = NULL, ios_base::openmode mode = ios::in | ios::binary);
+		bool fromFile(const string& fname = "", ios_base::openmode mode = ios::in | ios::binary);
 		bool fromMem(unsigned char *chunk, size_t size);
 
 		void unsetError();

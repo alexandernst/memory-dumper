@@ -3,6 +3,7 @@
 
 #include <cstdio>
 #include <cctype>
+#include <random>
 #include <string>
 #include <cstdlib>
 #include <sstream>
@@ -15,6 +16,7 @@ class Utils {
 		static bool isValidHexString(const string& str = "");
 		static bool isValidBinString(const string& str = "");
 		static const string removeSpaces(const string& str = "");
+		static string randomString(size_t len);
 
 };
 
