@@ -6,6 +6,8 @@
 #ifndef IFACE_H_INCLUDED
 #define IFACE_H_INCLUDED
 
+#include <string>
+
 using namespace std;
 
 typedef struct plugin_t {
@@ -14,7 +16,7 @@ typedef struct plugin_t {
 	string description;
 } plugin_t;
 
-#include "libs/cpp-bitstring/Bits.h"
+#include "../libs/cpp-bitstring/Bits.h"
 extern "C" plugin_t *init();
 extern "C" void process(Bits *data);
 

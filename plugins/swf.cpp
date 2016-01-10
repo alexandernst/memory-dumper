@@ -1,4 +1,4 @@
-#include "../iface.h"
+#include "../src/iface.h"
 
 #include <map>
 #include <cstdlib>
