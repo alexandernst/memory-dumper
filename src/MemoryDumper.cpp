@@ -261,9 +261,9 @@ int main(int argc, char **argv){
 		md->getChunksFromProcess();
 	}
 
-	for(std::vector<struct plugin_t *>::iterator plugins_iter = md->plugins->begin(); plugins_iter != md->plugins->end(); ++plugins_iter){
+	for(vector<struct plugin_t *>::iterator plugins_iter = md->plugins->begin(); plugins_iter != md->plugins->end(); ++plugins_iter){
 
-		for(std::vector<Bits *>::iterator chunks_iter = md->chunks->begin(); chunks_iter != md->chunks->end(); ++chunks_iter){
+		for(vector<Bits *>::iterator chunks_iter = md->chunks->begin(); chunks_iter != md->chunks->end(); ++chunks_iter){
 			void *(*f)(Bits *);
 
 			f = (void *(*)(Bits *)) dlsym((*plugins_iter)->hndl, "process");
