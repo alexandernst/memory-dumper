@@ -1,13 +1,8 @@
-#ifndef _LARGEFILE64_SOURCE
-#define _LARGEFILE64_SOURCE
-#endif
-#define _FILE_OFFSET_BITS 64
+#include "../iface.h"
 
 #include <map>
 #include <cstdlib>
 #include <iostream>
-
-#include "../iface.h"
 
 using namespace std;
 

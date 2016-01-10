@@ -1,7 +1,4 @@
-#ifndef _LARGEFILE64_SOURCE
-#define _LARGEFILE64_SOURCE
-#endif
-#define _FILE_OFFSET_BITS 64
+#include "iface.h"
 
 #include <vector>
 #include <iostream>
@@ -19,8 +16,6 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/ptrace.h>
-
-#include "iface.h"
 
 #define PLUGINS_DIR "./plugins/"
 
