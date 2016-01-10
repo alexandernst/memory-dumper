@@ -27,7 +27,7 @@ class MemoryDumper {
 		virtual ~MemoryDumper();
 
 		bool init(int pid);
-		bool init(const string& file);
+		bool init(const std::string& file);
 		bool initPlugins(char *plugins_list);
 		bool getChunksFromFile();
 		bool getChunksFromProcess();
