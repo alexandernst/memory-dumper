@@ -2,12 +2,12 @@
 using namespace std;
 
 MemoryDumper::MemoryDumper(){
-	this->chunks = new std::vector<Bits *>;
-	this->plugins = new std::vector<plugin_t *>;
+	this->chunks = new vector<Bits *>;
+	this->plugins = new vector<plugin_t *>;
 }
 
 MemoryDumper::~MemoryDumper(){
-	for(std::vector<struct plugin_t *>::iterator plugins_iter = this->plugins->begin(); plugins_iter != this->plugins->end(); ++plugins_iter){
+	for(vector<struct plugin_t *>::iterator plugins_iter = this->plugins->begin(); plugins_iter != this->plugins->end(); ++plugins_iter){
 		dlclose((*plugins_iter)->hndl);
 		free((*plugins_iter));
 	}
