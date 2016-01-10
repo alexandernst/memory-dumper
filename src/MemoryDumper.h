@@ -1,8 +1,6 @@
 #include "iface.h"
 
 #include <vector>
-#include <iostream>
-#include <cstdlib>
 
 #include <errno.h>
 #include <fcntl.h>

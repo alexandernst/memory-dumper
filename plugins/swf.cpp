@@ -1,8 +1,6 @@
 #include "../src/iface.h"
 
 #include <map>
-#include <cstdlib>
-#include <iostream>
 
 using namespace std;
 

@@ -2,14 +2,14 @@
 #define _LARGEFILE64_SOURCE
 #define _FILE_OFFSET_BITS 64
 
+#include <cstdlib>
 #include <string>
-
-using namespace std;
+#include <iostream>
 
 typedef struct plugin_t {
 	void *hndl;
-	string name;
-	string description;
+	std::string name;
+	std::string description;
 } plugin_t;
 
 #include "../libs/cpp-bitstring/Bits.h"
