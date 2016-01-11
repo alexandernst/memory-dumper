@@ -17,7 +17,33 @@ from memory.
 New plugins for dumping any other type of data can be created
 easily.
 
-Ok, I'd like to dump ```XYZ```
+How do I compile it?
+=============
+
+You'll need `meson`, `python3` and `ninja-build`. Once you have those, just run:
+
+    mkdir build
+    cd build
+    meson ..
+    ninja
+
+How do I use it?
+=============
+
+Go to the `build` directory and run:
+
+    sudo ./memory-dumper -p PID
+
+to dump the memory of a process (`sudo` is required because `memory-dumper` must read the
+memory of a process that doesn't own)
+
+or
+
+    ./memory-dumper -p /path/to/file.ext
+
+to dump the content of a file.
+
+Ok, I'd like to dump ```XYZ``` file
 =============
 
 You just need to create a plugin! It's that easy. Just look inside
@@ -30,8 +56,8 @@ and dump it's content.
 TO-DO:
 =============
 
-* Currently memory-dumper works only on Linux. Maybe I'll port it to 
-Windows at some point in the future, but I don't want to promise 
+* Currently memory-dumper works only on Linux. Maybe I'll port it to
+Windows at some point in the future, but I don't want to promise
 anything. Anyways, I'll accept a patch for this :)
 
 * I'm planning to write some more plugins. Probably a dumper for ```PDF```
