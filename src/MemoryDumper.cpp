@@ -170,7 +170,8 @@ bool MemoryDumper::getChunksFromProcess(){
 		mapname[0] = '\0';
 		sscanf(line_buf, "%lx-%lx %4s %lx %5s %ld %s", &start, &end, perm, &foo, dev, &inode, mapname);
 		/*We don't want to read the memory of shared libraries, devices, etc...*/
-		if(foo != 0 || inode != 0 || access(mapname, R_OK) == 0){
+		//if(foo != 0 || inode != 0 || access(mapname, R_OK) == 0){
+		if(perm[0] != 'r'){
 			continue;
 		}
 		/*Avoid non-sense*/
@@ -260,6 +261,10 @@ int main(int argc, char **argv){
 	}else if(md->from_process){
 		md->getChunksFromProcess();
 	}
+
+	//for(vector<Bits *>::iterator chunks_iter = md->chunks->begin(); chunks_iter != md->chunks->end(); ++chunks_iter){
+	//	(*chunks_iter)->toFile("./dumps/md.dump", 0, (*chunks_iter)->getMaxPosition(), ios_base::out | ios_base::binary | ios_base::app);
+	//}
 
 	for(vector<struct plugin_t *>::iterator plugins_iter = md->plugins->begin(); plugins_iter != md->plugins->end(); ++plugins_iter){
 
