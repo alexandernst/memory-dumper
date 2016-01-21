@@ -40,8 +40,13 @@ void process(Bits *data){
 
 	while(true){ /*TODO: Support CWF and ZWF ?*/
 
-		size_t pos = data->findNext("FWS", 3);
-		if(data->checkIfError() == true || data->canMoveForward(21) == false){
+		size_t start = data->findNext("FWS", 3);
+		if(data->checkIfError() == true){
+			break;
+		}
+
+		data->setPosition(start);
+		if(data->canMoveForward(21) == false){
 			break;
 		}
 
@@ -49,7 +54,7 @@ void process(Bits *data){
 		uint32_t total_length = 0;
 
 		/*Skip 3 bytes because of the signature*/
-		data->setPosition(pos + 3);
+		data->setPosition(start + 3);
 		total_length += 3;
 
 		/*Read Flash version*/
@@ -129,7 +134,7 @@ void process(Bits *data){
 
 		data->seek(-size);
 
-		data->toRandFile("./dumps/", "swf", pos, size);
+		data->toRandFile("./dumps/", "swf", start, size);
 	}
 
 }
