@@ -28,13 +28,11 @@
 #define get16bits(d) ((((uint32_t)(((const uint8_t *)(d))[1])) << 8) + (uint32_t)(((const uint8_t *)(d))[0]) )
 #endif
 
-using namespace std;
-
 class Bits {
 
 	public:
 
-		Bits(const string& fname = "", ios_base::openmode mode = ios::in | ios::binary);
+		Bits(const std::string& fname = "", std::ios_base::openmode mode = std::ios::in | std::ios::binary);
 
 		Bits(unsigned char *chunk, size_t size);
 
@@ -50,9 +48,9 @@ class Bits {
 
 		bool checkIfError();
 
-		bool toFile(const string& fname = "", size_t offset = 0, size_t size = 0, ios_base::openmode mode = ios::out | ios::binary | ios::trunc);
+		bool toFile(const std::string& fname = "", size_t offset = 0, size_t size = 0, std::ios_base::openmode mode = std::ios::out | std::ios::binary | std::ios::trunc);
 
-		bool toRandFile(const string& dir = "./", const string& ext = "", size_t offset = 0, size_t size = 0, ios_base::openmode mode = ios::out | ios::binary | ios::trunc);
+		bool toRandFile(const std::string& dir = "./", const std::string& ext = "", size_t offset = 0, size_t size = 0, std::ios_base::openmode mode = std::ios::out | std::ios::binary | std::ios::trunc);
 
 		void clear();
 
@@ -70,9 +68,9 @@ class Bits {
 
 		Bits *readBits(size_t n_bits, size_t skip_n_bits = 0);
 
-		bool compareBinary(const string& str, size_t check_n_bits, size_t skip_b_bits = 0);
+		bool compareBinary(const std::string& str, size_t check_n_bits, size_t skip_b_bits = 0);
 
-		bool compareHex(const string& str, size_t check_n_bytes, size_t skip_b_bytes = 0);
+		bool compareHex(const std::string& str, size_t check_n_bytes, size_t skip_b_bytes = 0);
 
 		unsigned char *peek(size_t n, bool reverse = false);
 
@@ -80,9 +78,9 @@ class Bits {
 
 		bool seek(size_t n, bool reverse = false);
 
-		size_t findPrevious(const string& pattern, size_t n);
+		size_t findPrevious(const std::string& pattern, size_t n);
 
-		size_t findNext(const string& pattern, size_t n);
+		size_t findNext(const std::string& pattern, size_t n);
 
 		bool testBit(unsigned int bit);
 
@@ -120,7 +118,7 @@ class Bits {
 		bool auto_free_mem, is_from_file, error;
 
 		void init();
-		bool fromFile(const string& fname = "", ios_base::openmode mode = ios::in | ios::binary);
+		bool fromFile(const std::string& fname = "", std::ios_base::openmode mode = std::ios::in | std::ios::binary);
 		bool fromMem(unsigned char *chunk, size_t size);
 
 		void unsetError();
