@@ -41,6 +41,7 @@ void process(Bits *data){
 	while(true){ /*TODO: Support CWF and ZWF ?*/
 
 		size_t start = data->findNext("FWS", 3);
+
 		if(data->checkIfError() == true){
 			break;
 		}
@@ -51,7 +52,7 @@ void process(Bits *data){
 		}
 
 		/*Reset the size to 0 after each loop*/
-		uint32_t total_length = 0;
+		size_t total_length = 0;
 
 		/*Skip 3 bytes because of the signature*/
 		data->setPosition(start + 3);
@@ -105,20 +106,20 @@ void process(Bits *data){
 		/*Read each frame and decide if we have a valid file*/
 		while(true){
 			uint16_t tag = data->read_uint16(true);
-			//uint16_t tag_type = tag >> 6;
-			uint16_t tag_length = tag & 0x3F;
+			uint16_t tag_type = tag >> 6;
+			uint32_t tag_length = tag & 0x3F;
 
-			if(tag_length == 63){
-				tag_length = data->read_uint32(true);
-				total_length += 2 + 4 + tag_length;
-			}else{
-				total_length += 2 + tag_length;
+			total_length += 2;
+			if(tag_length >= 63){
+				tag_length = (int32_t)data->read_uint32(true);
+				total_length += 4;
 			}
+			total_length += tag_length;
 
 			data->seek(tag_length);
 
 			//Perfect place to scan all tag types and extract fonts and pictures
-			if(tag == 0){
+			if(tag_type == 0 || total_length >= size){
 				break;
 			}
 		}
