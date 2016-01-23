@@ -3,3 +3,15 @@ swf = shared_library(
 	include_directories: src_dir,
 	dependencies: cppbitstringstatic
 )
+
+cwf = shared_library(
+	'cwf', 'cwf.cpp',
+	include_directories: src_dir,
+	dependencies: [zlib, cppbitstringstatic]
+)
+
+pdf = shared_library(
+	'pdf', 'pdf.cpp',
+	include_directories: src_dir,
+	dependencies: cppbitstringstatic
+)
