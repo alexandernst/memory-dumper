@@ -7,7 +7,7 @@ using namespace std;
 plugin_t *init(){
 	plugin_t *self = (plugin_t*) calloc(1, sizeof(plugin_t));
 	self->name = "swf";
-	self->description = "Dumps SWF files (No support for Zlib nor LZMA currently)";
+	self->description = "Dumps SWF files (No support for LZMA currently)";
 
 	return self;
 }
@@ -41,7 +41,6 @@ void process(Bits *data){
 	while(true){ /*TODO: Support CWF and ZWF ?*/
 
 		size_t start = data->findNext("FWS", 3);
-
 		if(data->checkIfError() == true){
 			break;
 		}
