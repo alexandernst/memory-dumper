@@ -1,6 +1,7 @@
 project('memory-dumper', 'cpp', default_options: ['warnlevel=2', 'cpp_std=c++11'])
 
 dl = find_library('dl')
+zlib = find_library('z')
 cppbitstringstatic = find_library('cpp-bitstring-static', dirs: meson.source_root() + '/libs/cpp-bitstring/')
 
 src_dir = include_directories('src')
