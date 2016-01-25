@@ -5,7 +5,7 @@
 using namespace std;
 
 plugin_t *init(){
-	plugin_t *self = (plugin_t*) calloc(1, sizeof(plugin_t));
+	plugin_t *self = new plugin_t();
 	self->name = "pdf";
 	self->description = "Dumps PDF files (No support for linearized PDF files)";
 

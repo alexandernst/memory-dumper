@@ -7,7 +7,7 @@
 using namespace std;
 
 plugin_t *init(){
-	plugin_t *self = (plugin_t*) calloc(1, sizeof(plugin_t));
+	plugin_t *self = new plugin_t();
 	self->name = "cwf";
 	self->description = "Dumps CWF files (zlib compressed SWF)";
 
@@ -24,7 +24,7 @@ plugin_t *init(){
 | |   |   |   |   |   |
 | |   |   |   |   |   |-> CMF (Compression Method and Flags, CM == 4 bits, CINFO == 4 bits)
 | |   |   |   |   |
-| |   |   |   |   |-> length of file in bytes (doesn't match if compressed)
+| |   |   |   |   |-> length of uncompressed file in bytes
 | |   |   |   |
 | |   |   |   |-> version as bit, not as ASCII (v4 == 0x04, not 0x34)
 | |   |   |
@@ -70,9 +70,9 @@ void process(Bits *data){
 		float s_version = (it = versions.find(version)) != versions.end() ? it->second : 0;
 
 		/*Only Flash version 6+ supports zlib compression*/
-		if(s_version < 6) {
-			continue;
-		}
+		//if(s_version < 6) {
+		//	continue;
+		//}
 		/*Read Flash file size*/
 		uint32_t size = data->read_uint32(true);
 
@@ -84,10 +84,10 @@ void process(Bits *data){
 			continue;
 		}
 
-		uint8_t flg = data->read_uint8();
-		uint8_t fcheck = flg & 0x1F;
+		//uint8_t flg = data->read_uint8();
+		//uint8_t fcheck = flg & 0x1F;
 
-		data->seek(2, true);
+		data->seek(1, true);
 		uint16_t check = data->read_uint16();
 		if(check % 31 != 0) {
 			continue;

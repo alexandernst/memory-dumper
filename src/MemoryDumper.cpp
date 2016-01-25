@@ -119,7 +119,7 @@ bool MemoryDumper::initPlugins(char *plugins_list){
 			printf("\tPlugin does not match with load list, unloading %s...\n", plugin->name.c_str());
 			/*Close handle and free memory*/
 			dlclose(plugin->hndl);
-			free(plugin);
+			delete plugin;
 		}
 	}
 

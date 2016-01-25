@@ -5,9 +5,9 @@
 using namespace std;
 
 plugin_t *init(){
-	plugin_t *self = (plugin_t*) calloc(1, sizeof(plugin_t));
+	plugin_t *self = new plugin_t();
 	self->name = "swf";
-	self->description = "Dumps SWF files (No support for LZMA currently)";
+	self->description = "Dumps SWF files (raw SWF files)";
 
 	return self;
 }
@@ -22,7 +22,7 @@ plugin_t *init(){
 | |   |   |   |   |   |
 | |   |   |   |   |   |-> frame size (variable length)
 | |   |   |   |   |
-| |   |   |   |   |-> length of file in bytes (doesn't match if compressed)
+| |   |   |   |   |-> length of file in bytes
 | |   |   |   |
 | |   |   |   |-> version as bit, not as ASCII (v4 == 0x04, not 0x34)
 | |   |   |
