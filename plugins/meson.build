@@ -10,6 +10,12 @@ cwf = shared_library(
 	dependencies: [zlib, cppbitstringstatic]
 )
 
+zwf = shared_library(
+	'zwf', 'zwf.cpp',
+	include_directories: src_dir,
+	dependencies: [lzma, cppbitstringstatic]
+)
+
 pdf = shared_library(
 	'pdf', 'pdf.cpp',
 	include_directories: src_dir,
