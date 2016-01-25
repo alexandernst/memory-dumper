@@ -124,6 +124,7 @@ void process(Bits *data){
 		size_t cur_offset = data->getPosition() - start;
 		size_t decompressed_size = strm.total_out + cur_offset;
 		size_t compressed_size = strm.total_in + cur_offset;
+
 		if(decompressed_size != size) {
 			continue;
 		}
