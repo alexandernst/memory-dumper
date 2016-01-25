@@ -127,7 +127,7 @@ void process(Bits *data){
 			continue;
 		}
 
-		cout << "FWS match (" << size / 1024 << " kb (" << size << " bytes)" <<
+		cout << "SWF (FWS) match (" << size / 1024 << " kb (" << size << " bytes)" <<
 				", version " << s_version <<
 				", framerate: " << framerate <<
 				", framecount: " << framecount << ")\n";

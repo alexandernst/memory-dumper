@@ -97,7 +97,7 @@ void process(Bits *data){
 		data->seek(2, true);
 
 		/*Zlib magic*/
-		void *dst[size];
+		void *dst = malloc(size);
 
 		z_stream strm  = {0};
 		strm.total_in  = strm.avail_in  = data->getMaxPosition() - data->getPosition();
@@ -125,11 +125,13 @@ void process(Bits *data){
 		size_t decompressed_size = strm.total_out + cur_offset;
 		size_t compressed_size = strm.total_in + cur_offset;
 
+		free(dst);
+
 		if(decompressed_size != size) {
 			continue;
 		}
 
-		cout << "FWS (CWS) match (" << compressed_size / 1024 << " kb (" << compressed_size << " bytes)" <<
+		cout << "SWF (CWS) match (" << compressed_size / 1024 << " kb (" << compressed_size << " bytes)" <<
 				", version " << s_version << ")\n";
 
 		data->toRandFile("./dumps/", "swf", start, compressed_size);

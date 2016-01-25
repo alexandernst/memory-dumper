@@ -88,7 +88,7 @@ void process(Bits *data){
 		}
 
 		/*LZMA magic*/
-		void *dst[size];
+		void *dst = malloc(size);
 
 		SizeT dst_size_pure = size;
 		SizeT src_size_pure = csize;
@@ -106,11 +106,13 @@ void process(Bits *data){
 			&g_Alloc //alloc functions
 		);
 
+		free(dst);
+
 		if (res != SZ_OK) {
 			continue;
 		}
 
-		cout << "FWS (CWS) match (" << csize / 1024 << " kb (" << csize << " bytes)" <<
+		cout << "SWF (ZWS) match (" << csize / 1024 << " kb (" << csize << " bytes)" <<
 				", version " << s_version << ")\n";
 
 		data->toRandFile("./dumps/", "swf", start, csize);
