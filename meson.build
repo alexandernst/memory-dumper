@@ -1,4 +1,4 @@
-project('memory-dumper', 'cpp', default_options: ['warnlevel=2', 'cpp_std=c++11'])
+project('memory-dumper', 'cpp', default_options: ['warnlevel=2', 'cpp_std=c++11', 'buildtype=debugoptimized'])
 
 dl = find_library('dl')
 zlib = find_library('z')
