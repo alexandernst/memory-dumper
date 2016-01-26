@@ -9,7 +9,11 @@ MemoryDumper::MemoryDumper(){
 MemoryDumper::~MemoryDumper(){
 	for(vector<struct plugin_t *>::iterator plugins_iter = this->plugins->begin(); plugins_iter != this->plugins->end(); ++plugins_iter){
 		dlclose((*plugins_iter)->hndl);
-		free((*plugins_iter));
+		delete (*plugins_iter);
+	}
+
+	for(vector<Bits *>::iterator chunks_iter = this->chunks->begin(); chunks_iter != this->chunks->end(); ++chunks_iter){
+		delete (*chunks_iter);
 	}
 
 	if(this->chunks != NULL){
