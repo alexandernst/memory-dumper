@@ -1,7 +1,5 @@
 #include "../src/iface.h"
 
-#include <map>
-
 using namespace std;
 
 plugin_t *init(){
