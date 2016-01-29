@@ -21,3 +21,9 @@ pdf = shared_library(
 	include_directories: src_dir,
 	dependencies: cppbitstringstatic
 )
+
+png = shared_library(
+	'png', 'png.cpp',
+	include_directories: src_dir,
+	dependencies: [zlib, cppbitstringstatic]
+)
