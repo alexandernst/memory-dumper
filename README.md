@@ -60,8 +60,7 @@ TO-DO:
 Windows at some point in the future, but I don't want to promise
 anything. Anyways, I'll accept a patch for this :)
 
-* I'm planning to write some more plugins. Probably a dumper for ```PDF```
-files. If you want a plugin for some specific data, use the ```New issue```
-button :)
+* I'm planning to write some more plugins. If you want a plugin for
+some specific file type, use the ```New issue``` button :)
 
 * Write some documentation about how to write a plugin.
